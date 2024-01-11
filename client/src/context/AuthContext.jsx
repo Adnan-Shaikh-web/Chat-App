@@ -38,7 +38,13 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.setItem('User', JSON.stringify(response))
         setUser(response)
     }, [registerInfo])
-    return <AuthContext.Provider value={{ user, registerInfo, updateRegisterInfo, registerUser, registerError, isRegisterLoading }}>
+
+
+    const logoutUser = useCallback(() => {
+        localStorage.removeItem('User')
+        setUser(null)
+    }, [])
+    return <AuthContext.Provider value={{ user, registerInfo, updateRegisterInfo, registerUser, registerError, isRegisterLoading, logoutUser }}>
         {children}
     </AuthContext.Provider>
 }
